@@ -10,6 +10,7 @@ class ControlPanel:
         self.world = world
         self.root = tk.Tk()
         self.root.title('Editing the Space')
+        self.update_screen = True
         width = 600
         height = 600
 
@@ -110,6 +111,7 @@ class ControlPanel:
         y = float(self.y_add.get())
         self.world.new_field(q, (x, y))
         self.info_lab['text']='Now you have ' + str(len(self.world.get_fields())) + ' fields'
+        self.update_screen = True
     def btn_edit(self, event):
         print('You press EDIT')
         id = int(self.id_edit.get())
@@ -118,15 +120,18 @@ class ControlPanel:
         y = float(self.y_edit.get())
         self.world.set_field(id, q, (x, y))
         self.info_lab['text'] = 'You have ' + str(len(self.world.get_fields())) + ' fields'
+        self.update_screen = True
     def btn_del(self, event):
         id = int(self.id_del.get())
         print('You have deleted the field with ', id)
         self.world.del_fields(id, id)
         self.info_lab['text'] = 'Now you have ' + str(len(self.world.get_fields())) + ' fields'
+        self.update_screen = True
     def btn_clear(self, event):
         print('You have cleared teh space')
         self.world.set_fields([])
         self.info_lab['text'] = 'The space has been cleared'
+        self.update_screen = True
     def id_get(self, event):
         id = int(self.id_ent_get.get())
         field = self.world.get_field(id)
@@ -134,5 +139,10 @@ class ControlPanel:
         self.q_f_info['text'] = 'q = ' + str(field.get_q()) +' C'
         self.x_f_info['text'] = 'x = ' + str(x) + ' m'
         self.y_f_info['text'] = 'y = ' + str(y) + ' m'
+        self.update_screen = True
     def update(self):
         self.root.update()
+    def update_it(self):
+        x = self.update_screen
+        self.update_screen = False
+        return x

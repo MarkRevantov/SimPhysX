@@ -1,9 +1,7 @@
 import numpy as np
 from scipy import constants as const
 
-
 '''Classes'''
-
 class ESField:
     '''ElectroStatic Field
     It has:
@@ -90,8 +88,25 @@ def canvas_to_real(coord, scale, width, height):
     y = (-y + height/2)/scale
     return (x, y)
 def real_to_canv(coord, scale, width, height):
-    global x_pos, y_pos
     x, y = coord
     x = int((x)*scale + width/2)
     y = int((-y)*scale + height/2)
     return (x, y)
+def draw_potential(x_start, y_start, x_end, y_end, scale, step, point_size, x_pos, y_pos):
+    for x in range(x_start, x_end, point_size * 5 // 2):
+        for y in range(y_start, y_end, point_size * 5 // 2):
+
+
+
+            '''
+            coord = canvas_to_real((x + x_pos, y + y_pos), scale=scale, width=width, height=height)
+            p = world.potential_is(coord)
+            if 0 <= p and p < 255 * 10000:
+                pg.draw.circle(screen, (255, 255 - p // 10000, 255 - p // 10000), (x0, y0), point_size)
+            elif 255 * 10000 <= p:
+                pg.draw.circle(screen, (255, 0, 0), (x, y), point_size)
+            elif (-255) * 10000 <= p and p < 0:
+                pg.draw.circle(screen, (255 + p // 10000, 255 + p // 10000, 255), (x0, y0), point_size)
+            else:
+                pg.draw.circle(screen, (0, 0, 255), (x, y), point_size)
+    '''
